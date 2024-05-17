@@ -32,13 +32,7 @@ app.post('/pay', async(req, res) => {
 })
 
 // Use the required dependencies
-app.use(cors(
-    {
-        origin: ["https://deploy-mern-1whq.vercel.app"], // Add comma here
-        methods: ["POST","GET"],
-        credentials: true
-    }
-));
+app.use(cors());
 
 
 
