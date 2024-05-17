@@ -18,7 +18,7 @@ const PaymentAmount = () => {
   const paying = async () => {
       try {
         //sending request
-        const response = await fetch ('http:/192.168.43.116:8080/pay', { //here, put your own phone's IP address to make it work.... http://--:--:--:--:8080/pay
+        const response = await fetch ('http:/192.168.43.116:8070/pay', { //here, put your own phone's IP address to make it work.... http://--:--:--:--:8080/pay
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
