@@ -14,8 +14,10 @@ export default function ResentTiket14() {
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
   const [ticketAmount, setTicketAmount] = useState(null);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
-  useEffect(() => {
+
+  {/*useEffect(() => {
     const getData = async () => {
       try {
         const storedP = await AsyncStorage.getItem('P');
@@ -29,6 +31,20 @@ export default function ResentTiket14() {
       }
     };
     getData();
+  }, []);*/}
+
+  useEffect(() => {
+    const fetchSelectedVehicle = async () => {
+      try {
+        const storedVehicle = await AsyncStorage.getItem('selectedVehicle');
+        if (storedVehicle !== null) {
+          setSelectedVehicle(JSON.parse(storedVehicle));
+        }
+      } catch (error) {
+        console.error('Error retrieving selected vehicle:', error);
+      }
+    };
+    fetchSelectedVehicle();
   }, []);
 
   useEffect(() => {
@@ -58,8 +74,8 @@ export default function ResentTiket14() {
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      const date = now.toDateString(); 
-      const time = now.toLocaleTimeString(); 
+      const date = now.toDateString();
+      const time = now.toLocaleTimeString();
       setCurrentDate(date);
       setCurrentTime(time);
     }, 1000);
@@ -122,23 +138,24 @@ export default function ResentTiket14() {
       <View style={styles.ticketContainer}>
         <View style={styles.ticketUpperBox}>
           <View style={styles.ticketBox}>
-            <View style={styles.ticketBoxRow}>
-              {/*<Text style={styles.ticketText}>Date & Time{ timestamps}</Text>*/}
-            </View>
+            
             <Text style={styles.ticketText2}>OUTER CIRCULAR EXPRESSWAY</Text>
             <Text style={styles.ticketText3}>USER FEE TICKET</Text>
           </View>
         </View>
         <View style={styles.ticket}>
-          <View style={styles.ticketRow}>
-            {/*<Text style={styles.ticketText}>Date & Time{ timestamps}</Text>*/}
-          </View>
+          
           <Text style={styles.ticketText}>Date: {currentDate}</Text>
           <Text style={styles.ticketText}>Time: {currentTime}</Text>
           <Text style={styles.ticketText}>Entrance Gate: {Entrance}</Text>
           <Text style={styles.ticketText}>Exit Gate: {Exit}</Text>
-          <Text style={styles.ticketText}>Vehicle Number: {P}</Text>
-          <Text style={styles.ticketText}>Vehicle Type: {p2}</Text>
+          {selectedVehicle && (
+        <View>
+          <Text style={styles.ticketText}>Vehicle number: {selectedVehicle.register_no}</Text>
+          
+        </View>
+      )}
+      
           <Text style={styles.ticketText}>Amount: {ticketAmount}</Text>
         </View>
       </View>
@@ -146,7 +163,6 @@ export default function ResentTiket14() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -196,20 +212,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     color: '#080742',
-    fontWeight:"450",
+    
   },
   ticketText3: {
     fontSize: 16,
     marginTop: 10,
     paddingLeft:50,
     color: '#080742',
-    fontWeight:"450",
+    
   },
   ticketText4: {
     fontSize: 16,
     marginTop: 10,
     paddingLeft:100,
     color: '#080742',
-    fontWeight:"500",
+    
   },
 });
