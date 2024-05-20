@@ -43,6 +43,8 @@ app.use(cors(
     
 ));
 
+//adding default codes
+
 app.get('/', async(req, res) => {
     res.json(message: "Hello!");
              })
