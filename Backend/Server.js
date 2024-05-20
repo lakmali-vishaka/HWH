@@ -43,7 +43,7 @@ app.use(cors(
     
 ));
 
-app.get("/",(rwq,res) => {
+app.get("/",(req,res) => {
     res.json("Hello!);
              })
 
