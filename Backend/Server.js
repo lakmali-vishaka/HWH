@@ -43,6 +43,10 @@ app.use(cors(
     
 ));
 
+app.get("/",(rwq,res) => {
+    res.json("Hello!);
+             })
+
 
 
 app.use(bodyParser.json());
