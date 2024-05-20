@@ -24,7 +24,11 @@ router.route("/check-ticket").post(async (req, res) => {
       res.status(500).json({ error: 'An error occurred while checking ticket validity' });
     }
   });
-  
+//adding default route
+
+router.route("/").get(async (req, res) => {
+    res.json(message: "Hello!");
+             })
 
 
 
