@@ -43,8 +43,8 @@ app.use(cors(
     
 ));
 
-app.get('/',(req,res) => {
-    res.json("Hello!");
+app.get('/', async(req, res) => {
+    res.json(message: "Hello!");
              })
 
 
